@@ -7,36 +7,61 @@ RSpec.describe "MerchantsAPI" do
     @merch1, @merch2 = create_list(:merchant, @qty)
   end
 
-  it 'Sends a list of Merchants' do
-    get api_v1_merchants_path
-    expect(response).to be_successful
+  describe "INDEX" do
 
-    merchants = JSON.parse(response.body)["data"]
-    expect(merchants.count).to eq(@qty)
-
-    merch1 = merchants.first["attributes"]
-    merch2 = merchants.last["attributes"]
-
-    expect(merch1['id']).to eq(@merch1.id)
-    expect(merch2['id']).to eq(@merch2.id)
-  end
-
-  describe 'Merchant Public Attributes' do
-    it 'ID' do
+    before(:each) do
       get api_v1_merchants_path
-      merchants = JSON.parse(response.body)["data"]
-      merch1 = merchants.first["attributes"]
-      expect(merch1['id']).to eq(@merch1.id)
+      @merchants = JSON.parse(response.body)["data"]
+      @merchant = @merchants.first["attributes"]
     end
 
-    it 'Name' do
-      get api_v1_merchants_path
-      merchants = JSON.parse(response.body)["data"]
-      merch1 = merchants.first["attributes"]
-      expect(merch1['name']).to eq(@merch1.name)
+    it 'Sends a list of Merchants' do
+      expect(response).to be_successful
+      expect(@merchants.count).to eq(@qty)
+
+      expect(@merchant['id']).to eq(@merch1.id)
+      
+      merch2 = @merchants.last["attributes"]
+      expect(merch2['id']).to eq(@merch2.id)
+    end
+
+    describe 'Merchant Public Attributes' do
+      it 'ID' do
+        expect(@merchant['id']).to eq(@merch1.id)
+      end
+
+      it 'Name' do
+        expect(@merchant['name']).to eq(@merch1.name)
+      end
+    end
+
+  end
+
+  describe "SHOW" do
+
+    before(:each) do
+      get api_v1_merchant_path(@merch1)
+      @merchant = JSON.parse(response.body)["data"]
+    end
+
+    it 'Sends a specific merchant' do
+      expect(response).to be_successful
+      expect(@merchant.class).to eq(Hash)
+      expect(@merchant['attributes']['id']).to eq(@merch1.id)
+    end
+
+    describe 'Merchant Public Attributes' do
+      it 'ID' do
+        expect(@merchant['attributes']['id']).to eq(@merch1.id)
+      end
+
+      it 'Name' do
+        expect(@merchant['attributes']['name']).to eq(@merch1.name)
+      end
     end
 
 
   end
+
 
 end
