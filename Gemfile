@@ -34,8 +34,7 @@ group :development, :test do
   gem 'pry'
   gem 'rspec-rails'
   gem 'simplecov'
-  # TODO - not sure we need this https://github.com/thoughtbot/shoulda-matchers
-  # gem 'shoulda-matchers', '~> 3.1'
+  gem 'shoulda-matchers', '~> 3.1'
   gem 'factory_bot_rails'
   gem 'awesome_print'
 end
