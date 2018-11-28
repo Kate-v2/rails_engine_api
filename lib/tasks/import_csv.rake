@@ -18,4 +18,12 @@ namespace :import do
     end
   end
 
+  desc 'import transactions from csv'
+  task transactions: :environment do
+    file = './db/data/transactions.csv'
+    CSV.foreach(file, headers: true) do |row|
+      Transaction.create!(row.to_h)
+    end
+  end
+
 end
