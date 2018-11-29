@@ -18,6 +18,7 @@ class Api::V1::InvoicesController < ApplicationController
     return Invoice.all               if path == api_v1_invoices_path
     return Invoice.find(params[:id]) if params[:id] && path == api_v1_invoice_path(params[:id])
     return Invoice.where(merchant_id: params[:merchant_id]) if params[:merchant_id] && path == api_v1_merchant_invoices_path(params[:merchant_id])
+    return Invoice.where(customer_id: params[:customer_id]) if params[:customer_id] && path == api_v1_customer_invoices_path(params[:customer_id])
   end
 
 

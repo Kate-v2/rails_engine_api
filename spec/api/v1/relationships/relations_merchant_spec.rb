@@ -60,8 +60,8 @@ RSpec.describe "Merchant Relations API" do
       expect(@invoices.count).to eq(@inv_qty)
       item2 = @invoices.last
       expect(@invoice["attributes"]["id"]).to eq(@inv1.id)
-      expect(item2["attributes"]["id"]).to eq(@inv2.id)
-    end
+      expect(item2["attributes"]["id"]).to    eq(@inv2.id)
+    end 
 
     it 'Does not send invoices unrelated to this merchant' do
       ids = @invoices.map { |hash| hash["attributes"]["id"] }
