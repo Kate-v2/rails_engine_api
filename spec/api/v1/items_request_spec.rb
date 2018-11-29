@@ -21,8 +21,8 @@ RSpec.describe "ItemsAPI" do
     it 'Sends a List of Items' do
       expect(response).to be_successful
       expect(@items.count).to eq(@qty)
-      expect(@item['attributes']['id']).to eq(@item1.id)
       item2 = @items.last
+      expect(@item['attributes']['id']).to eq(@item1.id)
       expect(item2['attributes']['id']).to eq(@item2.id)
     end
 

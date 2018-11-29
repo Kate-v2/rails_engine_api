@@ -20,8 +20,8 @@ RSpec.describe "MerchantsAPI" do
     it 'Sends a list of Merchants' do
       expect(response).to be_successful
       expect(@merchants.count).to eq(@qty)
-      expect(@merchant["attributes"]['id']).to eq(@merch1.id)
       merch2 = @merchants.last
+      expect(@merchant["attributes"]['id']).to eq(@merch1.id)
       expect(merch2["attributes"]['id']).to    eq(@merch2.id)
     end
 

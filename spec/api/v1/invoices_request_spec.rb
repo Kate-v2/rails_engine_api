@@ -27,8 +27,8 @@ RSpec.describe 'InvoicesAPI' do
     it "Sends a List of Invoices" do
       expect(response).to be_successful
       expect(@invoices.count).to eq(@qty)
-      expect(@invoice['attributes']['id']).to eq(@inv1.id)
       inv2 = @invoices.last
+      expect(@invoice['attributes']['id']).to eq(@inv1.id)
       expect(inv2['attributes']['id']).to     eq(@inv2.id)
     end
 
