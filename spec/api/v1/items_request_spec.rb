@@ -8,7 +8,6 @@ RSpec.describe "ItemsAPI" do
     @qty = 2
     @merchant = create(:merchant)
     @item1, @item2 = create_list(:item, @qty, merchant: @merchant)
-
   end
 
   describe 'INDEX' do
@@ -16,22 +15,22 @@ RSpec.describe "ItemsAPI" do
     before(:each) do
       get api_v1_items_path
       @items = json_data
-      @item  = @items.first['attributes']
+      @item  = @items.first
     end
 
     it 'Sends a List of Items' do
       expect(response).to be_successful
       expect(@items.count).to eq(@qty)
-      expect(@item['id']).to eq(@item1.id)
-      item2 = @items.last['attributes']
-      expect(item2['id']).to eq(@item2.id)
+      expect(@item['attributes']['id']).to eq(@item1.id)
+      item2 = @items.last
+      expect(item2['attributes']['id']).to eq(@item2.id)
     end
 
     describe "Item Public Attributes" do
-      it { @item['id'].should eq(@item1.id)}
-      it { @item['name'].should eq(@item1.name)}
-      it { @item['description'].should eq(@item1.description)}
-      it { @item['unit_price'].should eq(@item1.unit_price)}
+      it { @item['attributes']['id'].should          eq(@item1.id)}
+      it { @item['attributes']['name'].should        eq(@item1.name)}
+      it { @item['attributes']['description'].should eq(@item1.description)}
+      it { @item['attributes']['unit_price'].should  eq(@item1.unit_price)}
     end
   end
 
@@ -49,10 +48,10 @@ RSpec.describe "ItemsAPI" do
     end
 
     describe 'Item Public Attributes' do
-      it { @item['attributes']['id'].should eq(@item1.id)}
-      it { @item['attributes']['name'].should eq(@item1.name)}
+      it { @item['attributes']['id'].should          eq(@item1.id)}
+      it { @item['attributes']['name'].should        eq(@item1.name)}
       it { @item['attributes']['description'].should eq(@item1.description)}
-      it { @item['attributes']['unit_price'].should eq(@item1.unit_price)}
+      it { @item['attributes']['unit_price'].should  eq(@item1.unit_price)}
     end
   end
 

@@ -1,6 +1,8 @@
 require "rails_helper"
+require "api_helper"
 
 RSpec.describe "MerchantsAPI" do
+  include APIHelper
 
   before(:each) do
     @qty = 2
@@ -11,22 +13,22 @@ RSpec.describe "MerchantsAPI" do
 
     before(:each) do
       get api_v1_customers_path
-      @customers = JSON.parse(response.body)["data"]
-      @customer  = @customers.first["attributes"]
+      @customers = json_data
+      @customer  = @customers.first
     end
 
     it "Sends a list of Merchants" do
       expect(response).to be_successful
       expect(@customers.count).to eq(@qty)
-      expect(@customer['id']).to  eq(@customer1.id)
-      customer2 = @customers.last["attributes"]
-      expect(customer2['id']).to  eq(@customer2.id)
+      expect(@customer['attributes']['id']).to  eq(@customer1.id)
+      customer2 = @customers.last
+      expect(customer2['attributes']['id']).to  eq(@customer2.id)
     end
 
     describe 'Customer Public Attributes' do
-      it { @customer['id'].should         eq(@customer1.id)}
-      it { @customer['first_name'].should eq(@customer1.first_name)}
-      it { @customer['last_name'].should  eq(@customer1.last_name)}
+      it { @customer['attributes']['id'].should         eq(@customer1.id)}
+      it { @customer['attributes']['first_name'].should eq(@customer1.first_name)}
+      it { @customer['attributes']['last_name'].should  eq(@customer1.last_name)}
     end
   end
 
@@ -34,7 +36,7 @@ RSpec.describe "MerchantsAPI" do
 
     before(:each) do
       get api_v1_customer_path(@customer1)
-      @customer = JSON.parse(response.body)['data']
+      @customer = json_data
     end
 
     it 'Sends a specific merchant' do

@@ -1,6 +1,8 @@
 require "rails_helper"
+require "api_helper"
 
 RSpec.describe "TransactionsAPI" do
+  include APIHelper
 
   before(:each) do
     @qty = 2
@@ -11,37 +13,23 @@ RSpec.describe "TransactionsAPI" do
 
     before(:each) do
       get api_v1_transactions_path
-      @transactions = JSON.parse(response.body)["data"]
-      @transaction  = @transactions.first["attributes"]
+      @transactions = json_data
+      @transaction  = @transactions.first
     end
 
     it "Sends a list of transactions" do
       expect(response).to be_successful
       expect(@transactions.count).to eq(@qty)
-
-      expect(@transaction['id']).to eq(@trans1.id)
-
-      trans2 = @transactions.last['attributes']
-      expect(trans2['id']).to eq(@trans2.id)
+      trans2 = @transactions.last
+      expect(@transaction["attributes"]['id']).to eq(@trans1.id)
+      expect(trans2["attributes"]['id']).to       eq(@trans2.id)
     end
 
     describe 'Transaction Public Attributes' do
-
-      it 'ID' do
-        expect(@transaction['id']).to eq(@trans1.id)
-      end
-
-      it 'Credit Card Number' do
-        expect(@transaction['credit_card_number']).to eq(@trans1.credit_card_number)
-      end
-
-      it 'Credit Card Expiration Date' do
-        expect(@transaction['credit_card_expiration_date']).to eq(@trans1.credit_card_expiration_date)
-      end
-
-      it 'Result' do
-        expect(@transaction['result']).to eq(@trans1.result)
-      end
+        it { @transaction["attributes"]['id'].should                          eq(@trans1.id) }
+        it { @transaction["attributes"]['credit_card_number'].should          eq(@trans1.credit_card_number) }
+        it { @transaction["attributes"]['credit_card_expiration_date'].should eq(@trans1.credit_card_expiration_date) }
+        it { @transaction["attributes"]['result'].should                      eq(@trans1.result) }
     end
   end
 
@@ -49,7 +37,7 @@ RSpec.describe "TransactionsAPI" do
 
     before(:each) do
       get api_v1_transaction_path(@trans1)
-      @transaction = JSON.parse(response.body)['data']
+      @transaction = json_data
     end
 
     it "Sends a Specific Transaction" do
@@ -59,22 +47,10 @@ RSpec.describe "TransactionsAPI" do
     end
 
     describe 'Transaction Public Attributes' do
-
-      it 'ID' do
-        expect(@transaction['attributes']['id']).to eq(@trans1.id)
-      end
-
-      it 'Credit Card Number' do
-        expect(@transaction['attributes']['credit_card_number']).to eq(@trans1.credit_card_number)
-      end
-
-      it 'Credit Card Expiration Date' do
-        expect(@transaction['attributes']['credit_card_expiration_date']).to eq(@trans1.credit_card_expiration_date)
-      end
-
-      it 'Result' do
-        expect(@transaction['attributes']['result']).to eq(@trans1.result)
-      end
+      it { @transaction["attributes"]['id'].should                          eq(@trans1.id) }
+      it { @transaction["attributes"]['credit_card_number'].should          eq(@trans1.credit_card_number) }
+      it { @transaction["attributes"]['credit_card_expiration_date'].should eq(@trans1.credit_card_expiration_date) }
+      it { @transaction["attributes"]['result'].should                      eq(@trans1.result) }
     end
   end
 
