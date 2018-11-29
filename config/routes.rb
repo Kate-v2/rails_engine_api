@@ -34,56 +34,56 @@ end
   # merchants/:id/favorite_customer
   # merchants/:id/customers_with_pending_invoices
 
-  # -- Items --
-    # params: id, name, created_at, updated_at
-    # items/find?params
-    # items/find_all?params
-    # items/random
+# -- Items --
+  # params: id, name, created_at, updated_at
+  # items/find?params
+  # items/find_all?params
+  # items/random
 
-    # items/:id/invoice_items
-    # items/:id/merchant   NO S
+  # items/:id/invoice_items
+  # items/:id/merchant   NO S
 
-    # items/most_revenue?quantity=x
-    # items/most_items?quantity=x
-    # items/:id/best_day
+  # items/most_revenue?quantity=x
+  # items/most_items?quantity=x
+  # items/:id/best_day
 
-  # -- Customers --
-    # params: id, name, created_at, updated_at
-    # customers/find?params
-    # customers/find_all?params
-    # customers/random
+# -- Customers --
+  # params: id, name, created_at, updated_at
+  # customers/find?params
+  # customers/find_all?params
+  # customers/random
 
-    # customers/:id/invoices
-    # customers/:id/transactions
+  # customers/:id/invoices
+  # customers/:id/transactions
 
-    # customers/favorite_merchant
+  # customers/favorite_merchant
 
-  # -- Invoice_items --
-    # params: id, name, created_at, updated_at
-    # invoice_items/find?params
-    # invoice_items/find_all?params
-    # invoice_items/random
+# -- Invoice_items --
+  # params: id, name, created_at, updated_at
+  # invoice_items/find?params
+  # invoice_items/find_all?params
+  # invoice_items/random
 
-    # invoice_items/:id/invoice  NO S
-    # invoice_items/:id/item     NO S
+  # invoice_items/:id/invoice  NO S
+  # invoice_items/:id/item     NO S
 
-  # -- Invoices --
-    # params: id, name, created_at, updated_at
-    # invoices/find?params
-    # invoices/find_all?params
-    # invoices/random
+# -- Invoices --
+  # params: id, name, created_at, updated_at
+  # invoices/find?params
+  # invoices/find_all?params
+  # invoices/random
 
-    # invoices/:id/items
-    # invoices/:id/invoice_items
-    # invoices/:id/transactions
-    # invoices/:id/customers
-    # invoices/:id/merchant     No S
+  # invoices/:id/items
+  # invoices/:id/invoice_items
+  # invoices/:id/transactions
+  # invoices/:id/customers
+  # invoices/:id/merchant     No S
 
 
-  # -- Transactions --
-    # params: id, name, created_at, updated_at
-    # transactions/find?params
-    # transactions/find_all?params
-    # transactions/random
+# -- Transactions --
+  # params: id, name, created_at, updated_at
+  # transactions/find?params
+  # transactions/find_all?params
+  # transactions/random
 
-    # transactions/:id/invoice     No S
+  # transactions/:id/invoice     No S

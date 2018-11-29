@@ -1,11 +1,22 @@
 class Api::V1::InvoiceItemsController < ApplicationController
 
   def index
-    render json: InvoiceItemSerializer.new(InvoiceItem.all)
+    inv_items = choose_invoice_items
+    render json: InvoiceItemSerializer.new(inv_items)
   end
 
   def show
-    render json: InvoiceItemSerializer.new(InvoiceItem.find(params[:id]))
+    inv_item = choose_invoice_items
+    render json: InvoiceItemSerializer.new(inv_item)
+  end
+
+
+  private
+
+  def choose_invoice_items
+    path = request.path
+    return InvoiceItem.all               if path == api_v1_invoice_items_path
+    return InvoiceItem.find(params[:id]) if path == api_v1_invoice_item_path(params[:id]) && params[:id]
   end
 
 end

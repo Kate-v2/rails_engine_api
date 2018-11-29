@@ -1,11 +1,23 @@
 class Api::V1::TransactionsController < ApplicationController
 
   def index
-    render json: TransactionSerializer.new(Transaction.all)
+    transactions = choose_transactions
+    render json: TransactionSerializer.new(transactions)
   end
 
   def show
-    render json: TransactionSerializer.new(Transaction.find(params[:id]))
+    transaction = choose_transactions
+    render json: TransactionSerializer.new(transaction)
   end
+
+
+  private
+
+  def choose_transactions
+    path = request.path
+    return Transaction.all               if path == api_v1_transactions_path
+    return Transaction.find(params[:id]) if path == api_v1_transaction_path(params[:id]) && params[:id]
+  end
+
 
 end
