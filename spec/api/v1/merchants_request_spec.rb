@@ -18,21 +18,14 @@ RSpec.describe "MerchantsAPI" do
     it 'Sends a list of Merchants' do
       expect(response).to be_successful
       expect(@merchants.count).to eq(@qty)
-
       expect(@merchant['id']).to eq(@merch1.id)
-      
       merch2 = @merchants.last["attributes"]
       expect(merch2['id']).to eq(@merch2.id)
     end
 
     describe 'Merchant Public Attributes' do
-      it 'ID' do
-        expect(@merchant['id']).to eq(@merch1.id)
-      end
-
-      it 'Name' do
-        expect(@merchant['name']).to eq(@merch1.name)
-      end
+      it { @merchant['id'].should eq(@merch1.id)}
+      it { @merchant['name'].should eq(@merch1.name)}
     end
 
   end
@@ -51,16 +44,9 @@ RSpec.describe "MerchantsAPI" do
     end
 
     describe 'Merchant Public Attributes' do
-      it 'ID' do
-        expect(@merchant['attributes']['id']).to eq(@merch1.id)
-      end
-
-      it 'Name' do
-        expect(@merchant['attributes']['name']).to eq(@merch1.name)
-      end
+      it { @merchant['attributes']['id'].should eq(@merch1.id)}
+      it { @merchant['attributes']['name'].should eq(@merch1.name)}
     end
-
-
   end
 
 
