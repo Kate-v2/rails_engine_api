@@ -45,7 +45,7 @@ RSpec.describe "InvoiceItemsAPI" do
     describe "Invoice Item Public Attributes" do
       it { @i_item['attributes']['id'].should          eq(@i_item11.id) }
       it { @i_item['attributes']['quantity'].should    eq(@i_item11.quantity) }
-      it { @i_item['attributes']['unit_price'].should  eq(@i_item11.unit_price) }
+      it { @i_item['attributes']['unit_price'].should  eq((@i_item11.price)) }
     end
   end
 
@@ -65,7 +65,7 @@ RSpec.describe "InvoiceItemsAPI" do
     describe "Invoice Item Public Attributes" do
       it { @i_item['attributes']['id'].should          eq(@i_item11.id) }
       it { @i_item['attributes']['quantity'].should    eq(@i_item11.quantity) }
-      it { @i_item['attributes']['unit_price'].should  eq(@i_item11.unit_price) }
+      it { @i_item['attributes']['unit_price'].should  eq((@i_item11.price)) }
     end
   end
 

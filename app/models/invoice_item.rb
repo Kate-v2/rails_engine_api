@@ -1,3 +1,5 @@
+require "conversion"
+
 
 class InvoiceItem < ApplicationRecord
 
@@ -14,5 +16,10 @@ class InvoiceItem < ApplicationRecord
 
 
   # has_many :transactions, through: :invoice
+
+  def price
+    ConversionTool.convert_to_currency(self.unit_price)
+  end
+
 
 end
