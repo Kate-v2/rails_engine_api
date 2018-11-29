@@ -5,6 +5,11 @@ RSpec.describe "TransactionsAPI" do
   include APIHelper
 
   before(:each) do
+
+    @card_number = 'credit_card_number'
+    @card_date = 'credit_card_expiration_date'
+
+
     @customer1 = create(:customer)
     @customer2 = create(:customer)
     @merchant  = create(:merchant)
@@ -33,10 +38,10 @@ RSpec.describe "TransactionsAPI" do
     end
 
     describe 'Transaction Public Attributes' do
-        it { @transaction["attributes"]['id'].should                          eq(@trans1.id) }
-        it { @transaction["attributes"]['credit_card_number'].should          eq(@trans1.credit_card_number) }
-        it { @transaction["attributes"]['credit_card_expiration_date'].should eq(@trans1.credit_card_expiration_date) }
-        it { @transaction["attributes"]['result'].should                      eq(@trans1.result) }
+        it { @transaction["attributes"]['id'].should         eq(@trans1.id) }
+        it { @transaction["attributes"][@card_number].should eq(@trans1.credit_card_number) }
+        it { @transaction["attributes"][@card_date].should   eq(@trans1.credit_card_expiration_date) }
+        it { @transaction["attributes"]['result'].should     eq(@trans1.result) }
     end
   end
 
@@ -54,10 +59,10 @@ RSpec.describe "TransactionsAPI" do
     end
 
     describe 'Transaction Public Attributes' do
-      it { @transaction["attributes"]['id'].should                          eq(@trans1.id) }
-      it { @transaction["attributes"]['credit_card_number'].should          eq(@trans1.credit_card_number) }
-      it { @transaction["attributes"]['credit_card_expiration_date'].should eq(@trans1.credit_card_expiration_date) }
-      it { @transaction["attributes"]['result'].should                      eq(@trans1.result) }
+      it { @transaction["attributes"]['id'].should         eq(@trans1.id) }
+      it { @transaction["attributes"][@card_number].should eq(@trans1.credit_card_number) }
+      it { @transaction["attributes"][@card_date].should   eq(@trans1.credit_card_expiration_date) }
+      it { @transaction["attributes"]['result'].should     eq(@trans1.result) }
     end
   end
 
