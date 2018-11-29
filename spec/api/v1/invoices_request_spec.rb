@@ -8,8 +8,6 @@ RSpec.describe 'InvoicesAPI' do
   before(:each) do
     @customer = create(:customer)
     @merchant = create(:merchant)
-    # @item_qty
-    # @item1, @item2 = create_list(:item, @item_qty, merchant: @merchant)
 
     @inv1 = create(:invoice, merchant: @merchant, customer: @customer)
     @inv2 = create(:invoice, merchant: @merchant, customer: @customer)
@@ -56,6 +54,5 @@ RSpec.describe 'InvoicesAPI' do
       it { @invoice['attributes']['status'].should eq(@inv1.status)}
     end
   end
-
 
 end

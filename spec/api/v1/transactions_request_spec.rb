@@ -5,10 +5,8 @@ RSpec.describe "TransactionsAPI" do
   include APIHelper
 
   before(:each) do
-
     @card_number = 'credit_card_number'
-    @card_date = 'credit_card_expiration_date'
-
+    @card_date   = 'credit_card_expiration_date'
 
     @customer1 = create(:customer)
     @customer2 = create(:customer)

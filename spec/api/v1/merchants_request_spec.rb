@@ -51,5 +51,4 @@ RSpec.describe "MerchantsAPI" do
     end
   end
 
-
-end
+end 
