@@ -2,10 +2,13 @@ require 'rails_helper'
 require "api_helper"
 
 RSpec.describe "ItemsAPI" do
+  include APIHelper
 
   before(:each) do
     @qty = 2
-    @item1, @item2 = create_list(:item, @qty)
+    @merchant = create(:merchant)
+    @item1, @item2 = create_list(:item, @qty, merchant: @merchant)
+
   end
 
   describe 'INDEX' do
@@ -25,10 +28,10 @@ RSpec.describe "ItemsAPI" do
     end
 
     describe "Item Public Attributes" do
-      it 'ID'          { expect(@item['id']).to          eq(@item1.id) }
-      it 'Name'        { expect(@item['name']).to        eq(@item1.name) }
-      it 'Description' { expect(@item['description']).to eq(@item1.description) }
-      it 'Unit Price'  { expect(@item['unit_price']).to  eq(@item1.unit_price) }
+      it { @item['id'].should eq(@item1.id)}
+      it { @item['name'].should eq(@item1.name)}
+      it { @item['description'].should eq(@item1.description)}
+      it { @item['unit_price'].should eq(@item1.unit_price)}
     end
   end
 
@@ -46,14 +49,11 @@ RSpec.describe "ItemsAPI" do
     end
 
     describe 'Item Public Attributes' do
-      it 'ID'          { expect(@item['attributes']['id']).to          eq(@item1.id) }
-      it 'Name'        { expect(@item['attributes']['name']).to        eq(@item1.name) }
-      it 'Description' { expect(@item['attributes']['description']).to eq(@item1.description) }
-      it 'Unit Price'  { expect(@item['attributes']['unit_price']).to  eq(@item1.unit_price) }
+      it { @item['attributes']['id'].should eq(@item1.id)}
+      it { @item['attributes']['name'].should eq(@item1.name)}
+      it { @item['attributes']['description'].should eq(@item1.description)}
+      it { @item['attributes']['unit_price'].should eq(@item1.unit_price)}
     end
-
-
   end
-
 
 end
