@@ -18,26 +18,15 @@ RSpec.describe "MerchantsAPI" do
     it "Sends a list of Merchants" do
       expect(response).to be_successful
       expect(@customers.count).to eq(@qty)
-
-      expect(@customer['id']).to eq(@customer1.id)
-
+      expect(@customer['id']).to  eq(@customer1.id)
       customer2 = @customers.last["attributes"]
-      expect(customer2['id']).to eq(@customer2.id)
+      expect(customer2['id']).to  eq(@customer2.id)
     end
 
     describe 'Customer Public Attributes' do
-
-      it 'ID' do
-        expect(@customer['id']).to eq(@customer1.id)
-      end
-
-      it 'First Name' do
-        expect(@customer['first_name']).to eq(@customer1.first_name)
-      end
-
-      it 'Last Name' do
-        expect(@customer['last_name']).to eq(@customer1.last_name)
-      end
+      it { @customer['id'].should         eq(@customer1.id)}
+      it { @customer['first_name'].should eq(@customer1.first_name)}
+      it { @customer['last_name'].should  eq(@customer1.last_name)}
     end
   end
 
@@ -55,18 +44,9 @@ RSpec.describe "MerchantsAPI" do
     end
 
     describe 'Customer Public Attributes' do
-
-      it 'ID' do
-        expect(@customer['attributes']['id']).to eq(@customer1.id)
-      end
-
-      it 'First Name' do
-        expect(@customer['attributes']['first_name']).to eq(@customer1.first_name)
-      end
-
-      it 'Last Name' do
-        expect(@customer['attributes']['last_name']).to eq(@customer1.last_name)
-      end
+      it { @customer['attributes']['id'].should         eq(@customer1.id)}
+      it { @customer['attributes']['first_name'].should eq(@customer1.first_name)}
+      it { @customer['attributes']['last_name'].should  eq(@customer1.last_name)}
     end
   end
 
