@@ -5,8 +5,15 @@ RSpec.describe "TransactionsAPI" do
   include APIHelper
 
   before(:each) do
-    @qty = 2
-    @trans1, @trans2 = create_list(:transaction, @qty)
+    @customer1 = create(:customer)
+    @customer2 = create(:customer)
+    @merchant  = create(:merchant)
+    @inv1  = create(:invoice, customer: @customer1, merchant: @merchant)
+    @inv2  = create(:invoice, customer: @customer2, merchant: @merchant)
+
+    @trans1 = create(:transaction, invoice: @inv1)
+    @trans2 = create(:transaction, invoice: @inv2)
+    @qty = Transaction.count
   end
 
   describe "INDEX" do

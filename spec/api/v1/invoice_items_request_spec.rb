@@ -20,9 +20,6 @@ RSpec.describe "InvoiceItemsAPI" do
     @i_item21 = create(:invoice_item, invoice: @inv2, item: @item1)
     @i_item22 = create(:invoice_item, invoice: @inv2, item: @item2)
     @qty = InvoiceItem.count
-
-    # @qty = 2
-    # @i_item1, @i_item2 = create_list(:invoice_item, @qty)
   end
 
   describe "INDEX" do
