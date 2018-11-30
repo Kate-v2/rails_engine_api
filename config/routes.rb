@@ -2,6 +2,15 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      # namespace :merchants do
+      #   get 'find',          to: 'merchants#show',  as: :find
+      #   get 'find_all',      to: 'merchants#index', as: :find_all
+      #   get 'random',        to: 'merchants#show',  as: :random
+      #   get 'revenue',       to: 'revenue#show',    as: :revenue
+      #   get 'most_revenue',  to: 'merchants#index', as: :most_revenue
+      #   get 'most_items',    to: 'merchants#index', as: :most_items
+      # end
+
       resources :merchants, only: [:index, :show] do
         resources :items,    only: [:index]
         resources :invoices, only: [:index]
@@ -59,8 +68,8 @@ end
   # customers/find_all?params
   # customers/random
 
-  # customers/:id/invoices
-  # customers/:id/transactions
+  # DONE customers/:id/invoices
+  # DONE customers/:id/transactions
 
   # customers/favorite_merchant
 
