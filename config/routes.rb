@@ -33,7 +33,11 @@ Rails.application.routes.draw do
         get 'merchant', to: 'invoices/merchants#show', as: :merchant
       end
 
-      resources :items,         only: [:index, :show]
+      resources :items, only: [:index, :show] do
+        resources :invoice_items, only: [:index], module: :items
+
+      end
+
       resources :invoice_items, only: [:index, :show]
     end
   end
@@ -100,11 +104,11 @@ end
   # invoices/find_all?params
   # invoices/random
 
-  # invoices/:id/items
-  # invoices/:id/invoice_items
-  # invoices/:id/transactions
-  # invoices/:id/customers
-  # invoices/:id/merchant     No S
+  # DONE invoices/:id/items
+  # DONE invoices/:id/invoice_items
+  # DONE invoices/:id/transactions
+  # DONE invoices/:id/customers
+  # DONE invoices/:id/merchant     No S
 
 
 # -- Transactions --
