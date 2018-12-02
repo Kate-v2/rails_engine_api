@@ -1,7 +1,7 @@
 require "rails_helper"
 require "api_helper"
 
-RSpec.describe "Invocies Relations API" do
+RSpec.describe "Invoices Relations API" do
 
   include APIHelper
 
