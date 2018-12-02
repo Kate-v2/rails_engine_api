@@ -1,7 +1,7 @@
 require "rails_helper"
 require "api_helper"
 
-RSpec.describe "Merchant Relations API" do
+RSpec.describe "Transactions Relations API" do
   include APIHelper
 
   before(:each) do

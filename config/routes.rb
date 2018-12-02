@@ -15,14 +15,24 @@ Rails.application.routes.draw do
         resources :items,    only: [:index]
         resources :invoices, only: [:index]
       end
+
       resources :customers, only: [:index, :show] do
         resources :invoices,     only: [:index]
         resources :transactions, only: [:index]
       end
+
       resources :transactions,  only: [:index, :show] do
         get 'invoice', to: "invoices#show", as: :invoice
       end
-      resources :invoices,      only: [:index, :show]
+
+      resources :invoices, only: [:index, :show] do
+        # resources :items, only: [:index]
+        resources :invoice_items, only: [:index]
+        # resources :transactions,  only: [:index]
+        # get 'customer', to: 'customers#show', as :customer
+        # get 'merchant', to: 'merchants#show', as :merchant
+      end
+
       resources :items,         only: [:index, :show]
       resources :invoice_items, only: [:index, :show]
     end
@@ -103,4 +113,4 @@ end
   # transactions/find_all?params
   # transactions/random
 
-  # transactions/:id/invoice     No S
+  # DONE transactions/:id/invoice     No S
