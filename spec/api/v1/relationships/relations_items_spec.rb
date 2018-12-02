@@ -43,5 +43,22 @@ RSpec.describe "Items Relations API" do
     end
   end
 
+  describe 'merchant' do
+
+    before(:each) do
+      get api_v1_item_merchant_path(@item1)
+      @merch = json_data
+    end
+
+    it 'Sends a single merchant related to the item' do
+      expect(response).to be_successful
+      expect(@merch.class).to eq(Hash)
+      expect(@merch['attributes']['id']).to eq(@merchant.id)
+    end
+
+    it 'Does not send a merchant unrelated to the item' do
+      skip('Need to setup a way to test what is not there')
+    end
+  end
 
 end

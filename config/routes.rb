@@ -35,7 +35,7 @@ Rails.application.routes.draw do
 
       resources :items, only: [:index, :show] do
         resources :invoice_items, only: [:index], module: :items
-
+        get 'merchant', to: 'items/merchants#show', as: :merchant
       end
 
       resources :invoice_items, only: [:index, :show]
@@ -71,7 +71,7 @@ end
   # items/find_all?params
   # items/random
 
-  # items/:id/invoice_items
+  # DONE items/:id/invoice_items
   # items/:id/merchant   NO S
 
   # items/most_revenue?quantity=x
