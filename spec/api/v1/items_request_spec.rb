@@ -30,7 +30,7 @@ RSpec.describe "ItemsAPI" do
       it { @item['attributes']['id'].should          eq(@item1.id)}
       it { @item['attributes']['name'].should        eq(@item1.name)}
       it { @item['attributes']['description'].should eq(@item1.description)}
-      it { @item['attributes']['unit_price'].should  eq(@item1.unit_price)}
+      it { @item['attributes']['unit_price'].should  eq(@item1.price)}
     end
   end
 
@@ -51,7 +51,7 @@ RSpec.describe "ItemsAPI" do
       it { @item['attributes']['id'].should          eq(@item1.id)}
       it { @item['attributes']['name'].should        eq(@item1.name)}
       it { @item['attributes']['description'].should eq(@item1.description)}
-      it { @item['attributes']['unit_price'].should  eq(@item1.unit_price)}
+      it { @item['attributes']['unit_price'].should  eq(@item1.price)}
     end
   end
 

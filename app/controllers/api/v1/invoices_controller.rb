@@ -1,11 +1,14 @@
 class Api::V1::InvoicesController < ApplicationController
 
   def index
-    render json: InvoiceSerializer.new(Invoice.all)
+    invoices = Invoice.all
+    render json: InvoiceSerializer.new(invoices)
   end
 
   def show
-    render json: InvoiceSerializer.new(Invoice.find(params[:id]))
+    invoice = Invoice.find(params[:id])
+    render json: InvoiceSerializer.new(invoice)
   end
+
 
 end

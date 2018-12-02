@@ -38,8 +38,10 @@ RSpec.describe "TransactionsAPI" do
     describe 'Transaction Public Attributes' do
         it { @transaction["attributes"]['id'].should         eq(@trans1.id) }
         it { @transaction["attributes"][@card_number].should eq(@trans1.credit_card_number) }
-        it { @transaction["attributes"][@card_date].should   eq(@trans1.credit_card_expiration_date) }
         it { @transaction["attributes"]['result'].should     eq(@trans1.result) }
+        it { @transaction["attributes"]['invoice_id'].should eq(@trans1.invoice_id) }
+
+        it { @transaction["attributes"][@card_date].should   eq(nil) }
     end
   end
 
@@ -59,8 +61,10 @@ RSpec.describe "TransactionsAPI" do
     describe 'Transaction Public Attributes' do
       it { @transaction["attributes"]['id'].should         eq(@trans1.id) }
       it { @transaction["attributes"][@card_number].should eq(@trans1.credit_card_number) }
-      it { @transaction["attributes"][@card_date].should   eq(@trans1.credit_card_expiration_date) }
       it { @transaction["attributes"]['result'].should     eq(@trans1.result) }
+      it { @transaction["attributes"]['invoice_id'].should eq(@trans1.invoice_id) }
+
+      it { @transaction["attributes"][@card_date].should   eq(nil) }
     end
   end
 
