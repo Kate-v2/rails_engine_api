@@ -99,17 +99,45 @@ RSpec.describe "Invocies Relations API" do
       expect(ids).to     include(@trans1.id)
       expect(ids).to_not include(@other_transaction.id)
     end
-
-
   end
 
+  describe 'customer' do
+
+    before(:each) do
+      get api_v1_invoice_customer_path(@inv1)
+      @cust = json_data
+    end
+
+    it "Sends the customer that invoice belongs to" do
+      expect(response).to be_successful
+      expect(@cust.class).to eq(Hash)
+      expect(@cust['attributes']['id']).to eq(@customer.id)
+    end
+
+    it 'Does not send a customer that does not belong to invoice' do
+      skip("Need to setup a way to test what is not there")
+    end
+  end
+
+  describe 'merchant' do
+
+    before(:each) do
+      get api_v1_invoice_merchant_path(@inv1)
+      @merch = json_data
+    end
+
+    it "Sends the merchant that invoice belongs to" do
+      expect(response).to be_successful
+      expect(@merch.class).to eq(Hash)
+      expect(@merch['attributes']['id']).to eq(@merchant.id)
+    end
+
+    it 'Does not send a merchant that does not belong to invoice' do
+      skip("Need to setup a way to test what is not there")
+    end
+  end
 
 
 end
 
-
-  # items
-  # invoice_items
-  # transactions
-  # customer
   # merchant
