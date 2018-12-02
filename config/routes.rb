@@ -101,8 +101,8 @@ end
   # invoice_items/find_all?params
   # invoice_items/random
 
-  # invoice_items/:id/invoice  NO S
-  # invoice_items/:id/item     NO S
+  # DONE invoice_items/:id/invoice  NO S
+  # DONE invoice_items/:id/item     NO S
 
 # -- Invoices --
   # params: id, name, created_at, updated_at

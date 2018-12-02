@@ -25,7 +25,6 @@ RSpec.describe "Invoice Items Relations API" do
       expect(response).to be_successful
       expect(@invoice.class).to eq(Hash)
       expect(@invoice['attributes']['id']).to eq(@inv1.id)
-
     end
 
     it 'Does not send an invoice unrelated to the invoice item' do
