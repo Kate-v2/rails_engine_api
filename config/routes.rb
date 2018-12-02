@@ -12,8 +12,8 @@ Rails.application.routes.draw do
       # end
 
       resources :merchants, only: [:index, :show] do
-        resources :items,    only: [:index]
-        resources :invoices, only: [:index]
+        resources :items,    only: [:index], module: :merchants
+        resources :invoices, only: [:index], module: :merchants
       end
 
       resources :customers, only: [:index, :show] do
