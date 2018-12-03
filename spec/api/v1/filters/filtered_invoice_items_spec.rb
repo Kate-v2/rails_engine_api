@@ -56,44 +56,49 @@ RSpec.describe "Invoice Item Filtering API" do
 
     end
 
-    # describe 'it filters by created or updated at date' do
-    #
-    #   before(:each) do
-    #     @customer1 = create(:customer)
-    #     sleep(1)
-    #     @customer2 = create(:customer)
-    #   end
-    #
-    #   it 'created_at' do
-    #     skip("can't figure out ApplicationRecord Date methods")
-    #     expect(@customer1.created_at).to_not eq(@customer2.created_at)
-    #     date = @customer1.created_at
-    #
-    #     get api_v1_customers_find_path(created_at: date)
-    #     @customer = json_data
-    #     expect(@customer['attributes']['id']).to eq(@customer1.id)
-    #
-    #     date = @customer2.created_at
-    #     get api_v1_customers_find_path(created_at: date)
-    #     @customer = json_data
-    #     expect(@customer['attributes']['id']).to eq(@customer2.id)
-    #   end
-    #
-    #   it 'updated_at' do
-    #     skip("can't figure out ApplicationRecord Date methods")
-    #     expect(@customer1.updated_at).to_not eq(@customer2.updated_at)
-    #     date = @customer1.updated_at
-    #
-    #     get api_v1_customers_find_path(updated_at: date)
-    #     @customer = json_data
-    #     expect(@customer['attributes']['id']).to eq(@customer1.id)
-    #
-    #     date = @customer2.updated_at
-    #     get api_v1_customers_find_path(updated_at: date)
-    #     @customer = json_data
-    #     expect(@customer['attributes']['id']).to eq(@customer2.id)
-    #   end
-    # end
+    describe 'it filters by created or updated at date' do
+
+      before(:each) do
+        store_set
+        customers_set
+        @inv1 = create(:invoice, merchant: @merchant, customer: @customer)
+        @inv2 = create(:invoice, merchant: @merchant, customer: @customer)
+
+        @inv_item1 = create(:invoice_item, invoice: @inv1, item: @item1 )
+        sleep(1)
+        @inv_item2 = create(:invoice_item, invoice: @inv1, item: @item2 )
+      end
+
+      it 'created_at' do
+        skip("can't figure out ApplicationRecord Date methods")
+        expect(@inv_item1.created_at).to_not eq(@inv_item2.created_at)
+        date = @inv_item1.created_at
+
+        get api_v1_invoice_items_find_path(created_at: date)
+        @invoice_item = json_data
+        expect(@invoice_item['attributes']['id']).to eq(@inv_item1.id)
+
+        date = @inv_item2.created_at
+        get api_v1_invoice_items_find_path(created_at: date)
+        @invoice_item = json_data
+        expect(@invoice_item['attributes']['id']).to eq(@inv_item2.id)
+      end
+
+      it 'updated_at' do
+        skip("can't figure out ApplicationRecord Date methods")
+        expect(@inv_item1.updated_at).to_not eq(@inv_item2.updated_at)
+        date = @inv_item1.updated_at
+
+        get api_v1_invoice_items_find_path(updated_at: date)
+        @invoice_item = json_data
+        expect(@invoice_item['attributes']['id']).to eq(@inv_item1.id)
+
+        date = @inv_item2.updated_at
+        get api_v1_invoice_items_find_path(updated_at: date)
+        @invoice_item = json_data
+        expect(@invoice_item['attributes']['id']).to eq(@inv_item2.id)
+      end
+    end
 
   end
 

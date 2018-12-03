@@ -18,5 +18,8 @@ class Item < ApplicationRecord
     ConversionTool.convert_to_currency(self.unit_price)
   end
 
+  def self.name_is(name)
+    where('LOWER(name) = ?', name.downcase)
+  end
 
 end

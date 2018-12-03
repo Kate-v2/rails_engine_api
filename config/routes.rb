@@ -30,6 +30,11 @@ Rails.application.routes.draw do
         get 'invoice', to: "transactions/invoices#show", as: :invoice
       end
 
+      namespace :invoices do
+          get 'find',          to: 'filters#show',   as: :find
+          get 'find_all',      to: 'filters#index',  as: :find_all
+          get 'random',        to: 'filters#random', as: :random
+      end
       resources :invoices, only: [:index, :show] do
         resources :invoice_items, only: [:index], module: :invoices
         resources :items,         only: [:index], module: :invoices, as: :has_items
@@ -38,6 +43,11 @@ Rails.application.routes.draw do
         get 'merchant', to: 'invoices/merchants#show', as: :merchant
       end
 
+      namespace :items do
+          get 'find',          to: 'filters#show',   as: :find
+          get 'find_all',      to: 'filters#index',  as: :find_all
+          get 'random',        to: 'filters#random', as: :random
+      end
       resources :items, only: [:index, :show] do
         resources :invoice_items, only: [:index], module: :items
         get 'merchant', to: 'items/merchants#show', as: :merchant
