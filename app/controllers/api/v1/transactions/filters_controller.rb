@@ -20,7 +20,6 @@ class Api::V1::Transactions::FiltersController < ApplicationController
 
   def choose_method
     return Transaction.id_is(params[:id])               if params[:id]
-    # return Transaction.name_is(params[:name])           if params[:name]
     return Transaction.created_on(params[:created_at])  if params[:created_at]
     return Transaction.updated_on(params[:updated_at])  if params[:updated_at]
   end

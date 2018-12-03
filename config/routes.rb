@@ -10,7 +10,11 @@ Rails.application.routes.draw do
       #   get 'most_revenue',  to: 'merchants#index', as: :most_revenue
       #   get 'most_items',    to: 'merchants#index', as: :most_items
       # end
-
+      namespace :merchants do
+          get 'find',          to: 'filters#show',   as: :find
+          get 'find_all',      to: 'filters#index',  as: :find_all
+          get 'random',        to: 'filters#random', as: :random
+      end
       resources :merchants, only: [:index, :show] do
         resources :items,    only: [:index], module: :merchants
         resources :invoices, only: [:index], module: :merchants
@@ -81,9 +85,9 @@ end
 
 # -- Merchants --
   # params: id, name, created_at, updated_at
-  # merchants/find?params
-  # merchants/find_all?params
-  # merchants/random
+  # DONE-ISH merchants/find?params
+  # DONE-ISH merchants/find_all?params
+  # DONE-ISH merchants/random
 
   # DONE merchants/:id/items
   # DONE merchants/:id/invoices
@@ -98,9 +102,9 @@ end
 
 # -- Items --
   # params: id, name, created_at, updated_at
-  # items/find?params
-  # items/find_all?params
-  # items/random
+  # DONE-ISH items/find?params
+  # DONE-ISH items/find_all?params
+  # DONE-ISH items/random
 
   # DONE items/:id/invoice_items
   # DONE items/:id/merchant   NO S
@@ -122,18 +126,18 @@ end
 
 # -- Invoice_items --
   # params: id, name, created_at, updated_at
-  # invoice_items/find?params
-  # invoice_items/find_all?params
-  # invoice_items/random
+  # DONE-ISH invoice_items/find?params
+  # DONE-ISH invoice_items/find_all?params
+  # DONE-ISH invoice_items/random
 
   # DONE invoice_items/:id/invoice  NO S
   # DONE invoice_items/:id/item     NO S
 
 # -- Invoices --
   # params: id, name, created_at, updated_at
-  # invoices/find?params
-  # invoices/find_all?params
-  # invoices/random
+  # DONE-ISH invoices/find?params
+  # DONE-ISH invoices/find_all?params
+  # DONE-ISH invoices/random
 
   # DONE invoices/:id/items
   # DONE invoices/:id/invoice_items
@@ -144,8 +148,8 @@ end
 
 # -- Transactions --
   # params: id, name, created_at, updated_at
-  # transactions/find?params
-  # transactions/find_all?params
-  # transactions/random
+  # DONE-ISH transactions/find?params
+  # DONE-ISH transactions/find_all?params
+  # DONE-ISH transactions/random
 
   # DONE transactions/:id/invoice     No S

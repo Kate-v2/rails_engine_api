@@ -9,6 +9,9 @@ class Merchant < ApplicationRecord
   has_many :transactions,  through: :invoices
   has_many :customers,     through: :invoices
 
+  def self.name_is(name)
+    where('LOWER(name) = ?', name.downcase)
+  end
 
 
 end

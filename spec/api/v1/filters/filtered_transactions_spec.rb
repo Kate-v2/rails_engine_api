@@ -16,9 +16,6 @@ RSpec.describe "Transaction Filtering API" do
 
         @trans1 = create(:transaction, invoice: @inv1)
         @trans2 = create(:transaction, invoice: @inv2)
-        # @inv_item1 = create(:invoice_item, invoice: @inv1, item: @item1 )
-        # @inv_item2 = create(:invoice_item, invoice: @inv1, item: @item2 )
-        # @inv_item3 = create(:invoice_item, invoice: @inv2, item: @item2 )
       end
 
       it 'finds by id' do
