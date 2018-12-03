@@ -22,5 +22,13 @@ class InvoiceItem < ApplicationRecord
     ConversionTool.convert_to_currency(self.unit_price)
   end
 
+  # --- Filter ---
+
+  def self.name_is(name)
+    InvoiceItem
+    .joins(:item)
+    .where('LOWER(items.name) = ?', name.downcase)
+  end
+
 
 end
