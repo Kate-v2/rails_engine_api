@@ -3,9 +3,6 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       # namespace :merchants do
-      #   get 'find',          to: 'merchants/filter#show',  as: :find
-      #   get 'find_all',      to: 'merchants/filter#index', as: :find_all
-      #   get 'random',        to: 'merchants/filter#show',  as: :random
       #   get 'revenue',       to: 'revenue#show',    as: :revenue
       #   get 'most_revenue',  to: 'merchants#index', as: :most_revenue
       #   get 'most_items',    to: 'merchants#index', as: :most_items
