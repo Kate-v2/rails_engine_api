@@ -3,14 +3,17 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       namespace :merchants do
-          get 'find',          to: 'filters#show',    as: :find
-          get 'find_all',      to: 'filters#index',   as: :find_all
-          get 'random',        to: 'filters#random',  as: :random
-          get 'revenue',       to: 'revenue#revenue', as: :revenue
-          get 'most_revenue',  to: 'revenue#index',   as: :most_revenue
-          #   get 'most_items',    to: 'merchants#index', as: :most_items
+          get 'find',          to: 'filters#show',          as: :find
+          get 'find_all',      to: 'filters#index',         as: :find_all
+          get 'random',        to: 'filters#random',        as: :random
+          get 'revenue',       to: 'revenue#total_revenue', as: :revenue
+          get 'most_revenue',  to: 'revenue#index',         as: :most_revenue
+          get 'most_items',    to: 'revenue#most_items',  as: :most_items
       end
       resources :merchants, only: [:index, :show] do
+        get 'revenue',                         to: 'merchants/revenue#revenue',    as: :revenue
+        get 'favorite_customer',               to: 'merchants/customers#favorite_customer', as: :favorite_customer
+        get 'customers_with_pending_invoices', to: 'merchants/customers#pending',  as: :pending_customer
         resources :items,    only: [:index], module: :merchants
         resources :invoices, only: [:index], module: :merchants
       end
@@ -87,13 +90,13 @@ end
   # DONE merchants/:id/items
   # DONE merchants/:id/invoices
 
-  # merchants/revenue
-  # merchants/most_revenue?quantity=x
-  # merchants/most_items?quantity=x
-  # merchants/:id/revenue
+  # DONE merchants/revenue
+  # DONE merchants/most_revenue?quantity=x
+  # DONE merchants/most_items?quantity=x
+  # DONE merchants/:id/revenue
   # merchants/:id/revenue?date=x
-  # merchants/:id/favorite_customer
-  # merchants/:id/customers_with_pending_invoices
+  # DONE merchants/:id/favorite_customer
+  # DONE merchants/:id/customers_with_pending_invoices
 
 # -- Items --
   # params: id, name, created_at, updated_at
@@ -110,9 +113,9 @@ end
 
 # -- Customers --
   # params: id, name, created_at, updated_at
-  # DONE customers/find?params
-  # DONE customers/find_all?params
-  # DONE customers/random
+  # DONE-ISH customers/find?params
+  # DONE-ISH customers/find_all?params
+  # DONE-ISH customers/random
 
   # DONE customers/:id/invoices
   # DONE customers/:id/transactions

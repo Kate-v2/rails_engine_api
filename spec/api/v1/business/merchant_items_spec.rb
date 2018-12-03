@@ -1,7 +1,7 @@
 require "rails_helper"
 require "api_helper"
 
-RSpec.describe "MerchantsAPI" do
+RSpec.describe "Merchant by Top Sold Items" do
   include APIHelper
 
   before(:each) do
@@ -10,63 +10,20 @@ RSpec.describe "MerchantsAPI" do
     max_merchant
   end
 
-  describe 'returns total revenue for a single merchant' do
-
-    it 'revenue' do
-      get api_v1_merchant_revenue_path(@merch1)
-      revenue = json_data
-      rev = (@revenue1.to_f / 100).round(2)
+  describe 'merchant with most sold items' do
+    it 'merchant' do
+      get api_v1_merchants_most_items_path
+      merchant = json_data
       expect(response).to be_successful
-      expect(revenue.class).to eq(Hash)
-      expect(revenue['attributes']['revenue']).to eq(rev)
-    end
-  end
-
-  describe 'returns total revenue for all merchants' do
-
-    it 'total revenue' do
-      get api_v1_merchants_revenue_path
-      @revenue = json_data
-      expect(response).to be_successful
-      rev = ((@revenue1 + @revenue2 + @revenue3).to_f / 100).round(2)
-      expect(@revenue['attributes']['revenue']).to eq(rev)
+      expect(merchant.class).to eq(Hash)
+      expect(merchant['attributes']['id']).to eq(@merch3.id)
     end
 
-  end
-
-
-  describe 'ranks merchants by total revenue' do
-
-    it 'top merchant' do
-      get api_v1_merchants_most_revenue_path
-      @merchants = json_data
-      @merchant = @merchants.first
-
-      expect(response).to be_successful
-      expect(@merchants.class).to eq(Array)
-      expect(@merchants.count).to eq(1)
-      expect(@merchant.class).to eq(Hash)
-      expect(@merchant['attributes']['id']).to eq(@merch3.id)
-    end
-
-    it 'top two merchants' do
-      get api_v1_merchants_most_revenue_path(quantity: 2)
-      @merchants = json_data
-      @merchant1 = @merchants.first
-      @merchant2 = @merchants.last
-
-      expect(response).to be_successful
-      expect(@merchants.class).to eq(Array)
-      expect(@merchants.count).to eq(2)
-      expect(@merchant1.class).to eq(Hash)
-      expect(@merchant1).to_not eq(@merchant2)
-      expect(@merchant1['attributes']['id']).to eq(@merch3.id)
-      expect(@merchant2['attributes']['id']).to eq(@merch2.id)
-    end
   end
 
 
 end
+
 
 
 def min_merchant

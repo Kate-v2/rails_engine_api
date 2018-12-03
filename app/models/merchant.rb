@@ -13,7 +13,53 @@ class Merchant < ApplicationRecord
     where('LOWER(name) = ?', name.downcase)
   end
 
+  # --- Most sold items ---
 
+  def self.most_items
+    Merchant
+    .select('merchants.*, SUM(invoice_items.quantity) AS sum')
+    .joins(:invoice_items)
+    .group('merchants.id, invoices.id')
+    .order('sum DESC, invoices.created_at DESC')
+    .first
+  end
+
+
+
+  # --- Pending Customers ---
+
+  def self.pending_customers(merch_id)
+    Customer
+    .having('SUM( COALESCE( transactions.result, 0) ) = 0')
+    .left_outer_joins(:transactions)
+    .group('customers.id, invoices.customer_id')
+    .where('invoices.merchant_id = ?', merch_id)
+  end
+
+
+  # --- Favorite Customer ---
+
+  def self.favorite_customer(merch_id)
+    customer_successful_invoices
+    .where('invoices.merchant_id = ?', merch_id)
+    .select('customers.*, SUM(transactions.result) AS count')
+    .group('customers.id, invoices.customer_id')
+    .order('count DESC')
+    .first
+  end
+
+  def self.customer_successful_invoices
+    Customer
+    .joins(:transactions)
+    .where('transactions.result = ?', 1)
+  end
+
+  # --- Single Revenue ---
+
+  def self.revenue(merch_id)
+    inv = successful_invoice_items.where('invoices.merchant_id = ?', merch_id)
+    revenue = inv.inject(0) { |sum, obj| sum += (obj.unit_price * obj.quantity) }
+  end
 
   # --- Total Revenue ---
 
