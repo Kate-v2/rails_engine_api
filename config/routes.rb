@@ -3,28 +3,44 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       # namespace :merchants do
-      #   get 'find',          to: 'merchants#show',  as: :find
-      #   get 'find_all',      to: 'merchants#index', as: :find_all
-      #   get 'random',        to: 'merchants#show',  as: :random
       #   get 'revenue',       to: 'revenue#show',    as: :revenue
       #   get 'most_revenue',  to: 'merchants#index', as: :most_revenue
       #   get 'most_items',    to: 'merchants#index', as: :most_items
       # end
-
+      namespace :merchants do
+          get 'find',          to: 'filters#show',   as: :find
+          get 'find_all',      to: 'filters#index',  as: :find_all
+          get 'random',        to: 'filters#random', as: :random
+      end
       resources :merchants, only: [:index, :show] do
         resources :items,    only: [:index], module: :merchants
         resources :invoices, only: [:index], module: :merchants
       end
 
+      namespace :customers do
+          get 'find',          to: 'filters#show',   as: :find
+          get 'find_all',      to: 'filters#index',  as: :find_all
+          get 'random',        to: 'filters#random', as: :random
+      end
       resources :customers, only: [:index, :show] do
         resources :invoices,     only: [:index], module: :customers
         resources :transactions, only: [:index], module: :customers
       end
 
+      namespace :transactions do
+          get 'find',          to: 'filters#show',   as: :find
+          get 'find_all',      to: 'filters#index',  as: :find_all
+          get 'random',        to: 'filters#random', as: :random
+      end
       resources :transactions,  only: [:index, :show] do
         get 'invoice', to: "transactions/invoices#show", as: :invoice
       end
 
+      namespace :invoices do
+          get 'find',          to: 'filters#show',   as: :find
+          get 'find_all',      to: 'filters#index',  as: :find_all
+          get 'random',        to: 'filters#random', as: :random
+      end
       resources :invoices, only: [:index, :show] do
         resources :invoice_items, only: [:index], module: :invoices
         resources :items,         only: [:index], module: :invoices, as: :has_items
@@ -33,11 +49,21 @@ Rails.application.routes.draw do
         get 'merchant', to: 'invoices/merchants#show', as: :merchant
       end
 
+      namespace :items do
+          get 'find',          to: 'filters#show',   as: :find
+          get 'find_all',      to: 'filters#index',  as: :find_all
+          get 'random',        to: 'filters#random', as: :random
+      end
       resources :items, only: [:index, :show] do
         resources :invoice_items, only: [:index], module: :items
         get 'merchant', to: 'items/merchants#show', as: :merchant
       end
 
+      namespace :invoice_items do
+          get 'find',          to: 'filters#show',   as: :find
+          get 'find_all',      to: 'filters#index',  as: :find_all
+          get 'random',        to: 'filters#random', as: :random
+      end
       resources :invoice_items, only: [:index, :show] do
         get 'invoice', to: 'invoice_items/invoices#show', as: :invoice
         get 'item',    to: 'invoice_items/items#show',    as: :item
@@ -56,9 +82,9 @@ end
 
 # -- Merchants --
   # params: id, name, created_at, updated_at
-  # merchants/find?params
-  # merchants/find_all?params
-  # merchants/random
+  # DONE-ISH merchants/find?params
+  # DONE-ISH merchants/find_all?params
+  # DONE-ISH merchants/random
 
   # DONE merchants/:id/items
   # DONE merchants/:id/invoices
@@ -73,9 +99,9 @@ end
 
 # -- Items --
   # params: id, name, created_at, updated_at
-  # items/find?params
-  # items/find_all?params
-  # items/random
+  # DONE-ISH items/find?params
+  # DONE-ISH items/find_all?params
+  # DONE-ISH items/random
 
   # DONE items/:id/invoice_items
   # DONE items/:id/merchant   NO S
@@ -86,9 +112,9 @@ end
 
 # -- Customers --
   # params: id, name, created_at, updated_at
-  # customers/find?params
-  # customers/find_all?params
-  # customers/random
+  # DONE customers/find?params
+  # DONE customers/find_all?params
+  # DONE customers/random
 
   # DONE customers/:id/invoices
   # DONE customers/:id/transactions
@@ -97,18 +123,18 @@ end
 
 # -- Invoice_items --
   # params: id, name, created_at, updated_at
-  # invoice_items/find?params
-  # invoice_items/find_all?params
-  # invoice_items/random
+  # DONE-ISH invoice_items/find?params
+  # DONE-ISH invoice_items/find_all?params
+  # DONE-ISH invoice_items/random
 
   # DONE invoice_items/:id/invoice  NO S
   # DONE invoice_items/:id/item     NO S
 
 # -- Invoices --
   # params: id, name, created_at, updated_at
-  # invoices/find?params
-  # invoices/find_all?params
-  # invoices/random
+  # DONE-ISH invoices/find?params
+  # DONE-ISH invoices/find_all?params
+  # DONE-ISH invoices/random
 
   # DONE invoices/:id/items
   # DONE invoices/:id/invoice_items
@@ -119,8 +145,8 @@ end
 
 # -- Transactions --
   # params: id, name, created_at, updated_at
-  # transactions/find?params
-  # transactions/find_all?params
-  # transactions/random
+  # DONE-ISH transactions/find?params
+  # DONE-ISH transactions/find_all?params
+  # DONE-ISH transactions/random
 
   # DONE transactions/:id/invoice     No S
