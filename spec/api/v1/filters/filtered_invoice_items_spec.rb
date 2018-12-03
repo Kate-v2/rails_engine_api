@@ -181,7 +181,7 @@ RSpec.describe "Invoice Item Filtering API" do
         expect(@inv_item1.created_at).to_not eq(@inv_item2.created_at)
         date = @inv_item1.created_at
 
-        get api_v1_customers_find_all_path(created_at: date)
+        get api_v1_invoice_items_find_all_path(created_at: date)
         @invoice_items = json_data
         @invoice_item  = @invoice_items.first
         expect(response).to be_successful
@@ -189,7 +189,7 @@ RSpec.describe "Invoice Item Filtering API" do
         expect(@invoice_item['attributes']['id']).to eq(@inv_item1.id)
 
         date = @inv_item2.created_at
-        get api_v1_customers_find_all_path(created_at: date)
+        get api_v1_invoice_items_find_all_path(created_at: date)
         @invoice_item = json_data
         expect(@invoice_item['attributes']['id']).to eq(@inv_item2.id)
       end
@@ -199,7 +199,7 @@ RSpec.describe "Invoice Item Filtering API" do
         expect(@inv_item1.updated_at).to_not eq(@inv_item2.updated_at)
         date = @inv_item1.updated_at
 
-        get api_v1_customers_find_all_path(updated_at: date)
+        get api_v1_invoice_items_find_all_path(updated_at: date)
         @invoice_items = json_data
         @invoice_item  = @invoice_items.first
         expect(response).to be_successful
@@ -207,7 +207,7 @@ RSpec.describe "Invoice Item Filtering API" do
         expect(@invoice_item['attributes']['id']).to eq(@inv_item1.id)
 
         date = @inv_item2.updated_at
-        get api_v1_customers_find_all_path(updated_at: date)
+        get api_v1_invoice_items_find_all_path(updated_at: date)
         @invoice_item = json_data
         expect(@invoice_item['attributes']['id']).to eq(@inv_item2.id)
       end
@@ -228,11 +228,11 @@ RSpec.describe "Invoice Item Filtering API" do
       @inv_item3 = create(:invoice_item, invoice: @inv2, item: @item2 )
     end
 
-    it 'returns a single random customer' do
-      get api_v1_customers_random_path
-      @customer = json_data
-      expect(@customer.class).to eq(Hash)
-      expect(@customer['attributes']).to include('id')
+    it 'returns a single random invoice_item' do
+      get api_v1_invoice_items_random_path
+      @invoice_item = json_data
+      expect(@invoice_item.class).to eq(Hash)
+      expect(@invoice_item['attributes']).to include('id')
     end
 
   end

@@ -26,6 +26,11 @@ Rails.application.routes.draw do
         resources :transactions, only: [:index], module: :customers
       end
 
+      namespace :transactions do
+          get 'find',          to: 'filters#show',   as: :find
+          get 'find_all',      to: 'filters#index',  as: :find_all
+          get 'random',        to: 'filters#random', as: :random
+      end
       resources :transactions,  only: [:index, :show] do
         get 'invoice', to: "transactions/invoices#show", as: :invoice
       end
