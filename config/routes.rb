@@ -21,7 +21,6 @@ Rails.application.routes.draw do
           get 'find_all',      to: 'filters#index',  as: :find_all
           get 'random',        to: 'filters#random', as: :random
       end
-
       resources :customers, only: [:index, :show] do
         resources :invoices,     only: [:index], module: :customers
         resources :transactions, only: [:index], module: :customers
@@ -44,6 +43,11 @@ Rails.application.routes.draw do
         get 'merchant', to: 'items/merchants#show', as: :merchant
       end
 
+      namespace :invoice_items do
+          get 'find',          to: 'filters#show',   as: :find
+          get 'find_all',      to: 'filters#index',  as: :find_all
+          get 'random',        to: 'filters#random', as: :random
+      end
       resources :invoice_items, only: [:index, :show] do
         get 'invoice', to: 'invoice_items/invoices#show', as: :invoice
         get 'item',    to: 'invoice_items/items#show',    as: :item
@@ -92,9 +96,9 @@ end
 
 # -- Customers --
   # params: id, name, created_at, updated_at
-  # customers/find?params
-  # customers/find_all?params
-  # customers/random
+  # DONE customers/find?params
+  # DONE customers/find_all?params
+  # DONE customers/random
 
   # DONE customers/:id/invoices
   # DONE customers/:id/transactions
