@@ -5,15 +5,18 @@ class ApplicationRecord < ActiveRecord::Base
   # --- Filter ---
 
   def self.id_is(id)
-    find(id)
+    where(id: id)
   end
 
   def self.created_on(date)
-    where(created_at: date)
+    # binding.pry
+    # where('CAST(created_at AS varchar) = ?', DateTime.parse(date).to_s).order(created_at: :asc)
+    where("to_char(created_at, 'YYYY-MM-DD HH:MM:SS') = ?", date).order(created_at: :asc)
   end
 
   def self.updated_on(date)
-    where(updated_at: date)
+    # where('CAST(updated_at AS varchar) = ?', DateTime.parse(date).to_s).order(created_at: :asc)
+    where('CAST(updated_at AS varchar) = ?', DateTime.parse(date).to_s).order(created_at: :asc)
   end
 
   # --- Random ---
@@ -21,7 +24,6 @@ class ApplicationRecord < ActiveRecord::Base
   def self.random
     order("RANDOM()").first
   end
-
 
 
 

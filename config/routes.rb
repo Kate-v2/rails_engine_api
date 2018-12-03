@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       # namespace :merchants do
-      #   get 'find',          to: 'merchants#show',  as: :find
-      #   get 'find_all',      to: 'merchants#index', as: :find_all
-      #   get 'random',        to: 'merchants#show',  as: :random
+      #   get 'find',          to: 'merchants/filter#show',  as: :find
+      #   get 'find_all',      to: 'merchants/filter#index', as: :find_all
+      #   get 'random',        to: 'merchants/filter#show',  as: :random
       #   get 'revenue',       to: 'revenue#show',    as: :revenue
       #   get 'most_revenue',  to: 'merchants#index', as: :most_revenue
       #   get 'most_items',    to: 'merchants#index', as: :most_items
@@ -14,6 +14,12 @@ Rails.application.routes.draw do
       resources :merchants, only: [:index, :show] do
         resources :items,    only: [:index], module: :merchants
         resources :invoices, only: [:index], module: :merchants
+      end
+
+      namespace :customers do
+          get 'find',          to: 'filters#show',   as: :find
+          get 'find_all',      to: 'filters#index',  as: :find_all
+          get 'random',        to: 'filters#random', as: :random
       end
 
       resources :customers, only: [:index, :show] do
