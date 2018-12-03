@@ -1,24 +1,50 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Requirements:
+* ruby '2.4.1'
+* rails '5.2.1'
 
-Things you may want to cover:
+Installation: 
+* bundle install
+* bundle update
+* rake db:{drop,create,migrate,test:prepare}
 
-* Ruby version
+Additional Gems (in Gemfile):
+* gem 'fast_jsonapi'
+* gem 'simplecov'
+* gem 'shoulda-matchers', '~> 3.1'
+* gem 'factory_bot_rails'
+* gem 'faker'
+* gem 'awesome_print'
 
-* System dependencies
+Testing
+Using RSpec
+* rails g rspec:install
+* rspec (to run all tests from the terminal)
 
-* Configuration
+Seeding:
 
-* Database creation
 
-* Database initialization
+Data is stored in CSV files (db/data/'*'.csv). Enter order-dependent:
+* rake import:merchants
+* rake import:customers
+* rake import:items
+* rake import:invoices
+* rake import:transactions
+* rake import:invoice_items
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+(rake tasks stored in /lib/tasks/import_csv.rake)
 
-* Deployment instructions
 
-* ...
+Rails Engine
+-
+Models:
+* merchant
+* customer
+* item
+* invoice
+* transactions
+* invoice_items
+
+This JSON only application reveals business insight about the above categories, their relationships, and some statistics, including optional filters.
